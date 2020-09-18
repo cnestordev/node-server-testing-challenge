@@ -2,7 +2,8 @@ const db = require('../data/connections')
 
 module.exports = {
     findAll,
-    addUser
+    addUser,
+    removeUser
 }
 
 async function findAll() {
@@ -17,4 +18,9 @@ async function addUser(body) {
     const [user] = await db('users').where({ id })
 
     return user
+}
+
+async function removeUser(id) {
+    const response = await db('users').where({ id }).del()
+    return response
 }
